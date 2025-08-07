@@ -50,10 +50,21 @@
 
   # Enable the GNOME Desktop Environment.
   #services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  #services.xserver.desktopManager.gnome.enable = true;
 
   # Enable Cosmic Desktop Environment
-  services.desktopManager.cosmic.enable = true;
+  services = {
+    desktopManager.cosmic.enable = true;
+    displayManager.cosmic-greeter.enable = true;
+  };
+
+ # Enable and basic setup for Niri wm
+  programs = {
+    niri.enable = true;
+    fuzzel.enable = true;
+    waybar.enable = true;
+    swaybg.enable = true;
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {

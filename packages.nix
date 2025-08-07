@@ -10,13 +10,16 @@
   # System packages
   environment.systemPackages = with pkgs; [
     # System programs
+    bottom
+    brush
     eza
     nushell
     vim
     wezterm
+    zoxide
 
     # Gnome extensions
-    gnomeExtensions.tiling-shell
+    #gnomeExtensions.paperwm
 
     # Office+
     gimp3
@@ -50,6 +53,14 @@
 
   # Install packages with specific options
   programs = {
+    # Starship
+    starship = {
+      enable = true;
+      settings = {
+        # Empty for now
+      };
+    };
+    # Steam
     steam = {
      enable = true;
      remotePlay.openFirewall = true;
