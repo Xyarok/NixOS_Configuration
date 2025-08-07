@@ -9,8 +9,11 @@
 
   # System packages
   environment.systemPackages = with pkgs; [
-    # System
+    # System programs
     eza
+    nushell
+    vim
+    wezterm
 
     # Gnome extensions
     gnomeExtensions.tiling-shell
@@ -28,40 +31,30 @@
     # Online
     floorp
     grayjay
-    librewolf
+    tor-browser
     wget
 
     # Security
     proton-pass
     protonvpn-gui
 
-    # Editors
-    vim
-    vscodium
-    zed-editor
-
     # Programming
+    cargo
+    gcc
     git
     python3Full
+    rustc
+    vscodium
+    zed-editor
   ];
 
   # Install packages with specific options
   programs = {
-
     steam = {
      enable = true;
      remotePlay.openFirewall = true;
      dedicatedServer.openFirewall = true;
      localNetworkGameTransfers.openFirewall = true;
-    };
-
-    nushell = {
-      enable = true;
-      configFile.source = ~/.config/nushell/config.nu;
-      shellAliases = {
-        nll = "eza -la --group-directories-first";
-        nls = "eza -l --group-directories-first";
-      };
     };
   };
 }
