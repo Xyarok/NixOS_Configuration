@@ -18,8 +18,21 @@
     wezterm
     zoxide
 
+    # Fonts
+    font-awesome
+
     # Gnome extensions
     #gnomeExtensions.paperwm
+
+    # Niri
+    fuzzel
+    gnome-keyring
+    mako
+    polkit_gnome
+    swayidle
+    swaylock
+    swww
+    waybar
 
     # Office+
     gimp3

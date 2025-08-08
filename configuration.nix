@@ -58,13 +58,10 @@
     displayManager.cosmic-greeter.enable = true;
   };
 
- # Enable and basic setup for Niri wm
-  programs = {
-    niri.enable = true;
-    fuzzel.enable = true;
-    waybar.enable = true;
-    swaybg.enable = true;
-  };
+  # Enable niri wm
+  programs.niri.enable = true;
+  services.gnome.gnome-keyring.enable = true;
+  security.polkit.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
