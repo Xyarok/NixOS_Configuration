@@ -25,6 +25,7 @@
     #gnomeExtensions.paperwm
 
     # Niri
+    eww
     fuzzel
     gnome-keyring
     mako
