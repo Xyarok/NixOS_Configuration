@@ -7,7 +7,7 @@ in
     [
       ./hardware-configuration.nix
       ./packages.nix
-      (./system/. + "/${hostname}.nix")
+      (./systems/. + "/${hostname}.nix")
     ];
 
   # Bootloader.
