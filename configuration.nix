@@ -1,38 +1,46 @@
 { config, pkgs, ... }:
 
-let hostname="redMouse";
+let hostname="blueMouse";
 in
 {
   imports =
     [
       ./hardware-configuration.nix
-      ./packages.nix
       (./systems/. + "/${hostname}.nix")
+      ./packages.nix
     ];
 
-  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  boot.initrd.luks.devices."luks-9a3c2bf6-0d17-475b-99d4-36ac740ac7cd".device = "/dev/disk/by-uuid/9a3c2bf6-0d17-475b-99d4-36ac740ac7cd";
+  boot.initrd.luks.devices."luks-4f6e6440-ca80-4b55-859c-0621809bdfd8".device = "/dev/disk/by-uuid/4f6e6440-ca80-4b55-859c-0621809bdfd8";
+
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "en_US.UTF-8";
+    LC_IDENTIFICATION = "en_US.UTF-8";
+    LC_MEASUREMENT = "en_US.UTF-8";
+    LC_MONETARY = "en_US.UTF-8";
+    LC_NAME = "en_US.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
+    LC_PAPER = "en_US.UTF-8";
+    LC_TELEPHONE = "en_US.UTF-8";
+    LC_TIME = "en_US.UTF-8";
+  };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the GNOME Desktop Environment.
-  #services.xserver.displayManager.gdm.enable = true;
-  #services.xserver.desktopManager.gnome.enable = true;
-
-  # Enable Cosmic Desktop Environment
+  # Enable the Cosmic Desktop Environment.
   services = {
-    desktopManager.cosmic.enable = true;
     displayManager.cosmic-greeter.enable = true;
+    desktopManager.cosmic.enable = true;
   };
 
-  # Enable niri wm
+  # Enable Niri WM
   programs.niri.enable = true;
   services.gnome.gnome-keyring.enable = true;
   security.polkit.enable = true;
@@ -43,10 +51,8 @@ in
     variant = "";
   };
 
-  # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -54,6 +60,7 @@ in
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
     #jack.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
@@ -61,18 +68,15 @@ in
     #media-session.enable = true;
   };
 
-  # User account(s)
   users.users.xyarok = {
     isNormalUser = true;
     description = "Xyarok";
     extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.nushell;
     packages = with pkgs; [
     #  thunderbird
     ];
   };
 
-  # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -83,6 +87,23 @@ in
   #   enableSSHSupport = true;
   # };
 
-  # System version
-  system.stateVersion = "25.05";
+  # List services that you want to enable:
+
+  # Enable the OpenSSH daemon.
+  # services.openssh.enable = true;
+
+  # Open ports in the firewall.
+  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedUDPPorts = [ ... ];
+  # Or disable the firewall altogether.
+  # networking.firewall.enable = false;
+
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "25.05"; # Did you read the comment?
+
 }
