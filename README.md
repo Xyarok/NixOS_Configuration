@@ -1,6 +1,6 @@
 My NixOS configuration. I am a begginer so it is in need of a lot of work.
 
-Both the (mostly) universal files as well as the few system specific files are included within this repo.
+Both the universal files as well as the few system specific files are included within this repo.
 
 If you want to use flakes it is safer to enable them on your system before downloading these configuration files. If you do not use flakes you do not need the flake.nix file.
 
